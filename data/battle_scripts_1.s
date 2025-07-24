@@ -8108,10 +8108,12 @@ BattleScript_IntimidateInReverse:
 
 
 BattleScript_FrightenActivates::
+	savetarget
+.if B_ABILITY_POP_UP == TRUE
 	showabilitypopup BS_ATTACKER
-	copybyte sSAVED_BATTLER, gBattlerTarget
 	pause B_WAIT_TIME_LONG
 	destroyabilitypopup
+.endif
 	setbyte gBattlerTarget, 0
 BattleScript_FrightenLoop:
 	jumpifbyteequal gBattlerTarget, gBattlerAttacker, BattleScript_FrightenLoopIncrement
@@ -8125,21 +8127,24 @@ BattleScript_FrightenEffect:
 	statbuffchange STAT_CHANGE_NOT_PROTECT_AFFECTED | STAT_CHANGE_ALLOW_PTR, BattleScript_FrightenLoopIncrement
 	setgraphicalstatchangevalues
 	jumpifability BS_TARGET, ABILITY_CONTRARY, BattleScript_FrightenContrary
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_DECREASE, BattleScript_FrightenWontDecrease
 	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
 	printstring STRINGID_PKMNCUTSSPATTACKWITH
 BattleScript_FrightenEffect_WaitString:
 	waitmessage B_WAIT_TIME_LONG
 	copybyte sBATTLER, gBattlerTarget
-	call BattleScript_TryIntimidateHoldEffects
 BattleScript_FrightenLoopIncrement:
 	addbyte gBattlerTarget, 1
 	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_FrightenLoop
-BattleScript_FrightenEnd:
 	copybyte sBATTLER, gBattlerAttacker
 	destroyabilitypopup
-	copybyte gBattlerTarget, sSAVED_BATTLER
+	restoretarget
 	pause B_WAIT_TIME_MED
 	end3
+
+BattleScript_FrightenWontDecrease:
+	printstring STRINGID_STATSWONTDECREASE
+	goto BattleScript_FrightenEffect_WaitString
 
 BattleScript_FrightenContrary:
 	call BattleScript_AbilityPopUpTarget
