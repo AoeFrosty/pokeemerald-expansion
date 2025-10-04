@@ -243,11 +243,11 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .power = 90,
         .type = TYPE_FIGHTING,
         .accuracy = 95,
-        .recoil = 25,
         .pp = 20,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
+        .argument = { .recoilPercentage = 25 },
         .makesContact = TRUE,
         .punchingMove = TRUE,
         .contestEffect = CONTEST_EFFECT_HIGHLY_APPEALING,
@@ -1054,7 +1054,6 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .power = 90,
         .type = TYPE_NORMAL,
         .accuracy = 95,
-        .recoil = 25,
         .pp = 20,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
@@ -21239,14 +21238,14 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .description = COMPOUND_STRING(
             "A heavy slam using skeleton.\n"
             "It also hurts the user."),
-        .effect = EFFECT_HIT,
+        .effect = EFFECT_RECOIL,
         .power = 120,
         .type = TYPE_BUG,
         .accuracy = 100,
-        .recoil = 33,
         .pp = 10,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
+        .argument = { .recoilPercentage = 33 },
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .skyBattleBanned = B_EXTRAPOLATED_MOVE_FLAGS,
@@ -21258,7 +21257,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .description = COMPOUND_STRING(
             "Scatters a powder that may\n"
             "frostbite the foe."),
-        .effect = EFFECT_FROSTBITE,
+        .effect = EFFECT_NON_VOLATILE_STATUS,
         .power = 0,
         .type = TYPE_GRASS,
         .accuracy = 75,
@@ -21267,6 +21266,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_STATUS,
         .zMove = { .effect = Z_EFFECT_SPDEF_UP_1 },
+        .argument = { .nonVolatileStatus = MOVE_EFFECT_BURN },
         .magicCoatAffected = TRUE,
         .powderMove = TRUE,
         .argument = 0,
@@ -21282,7 +21282,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .description = COMPOUND_STRING(
             "Scatters a powder that may\n"
             "burn the foe."),
-        .effect = EFFECT_WILL_O_WISP,
+        .effect = EFFECT_NON_VOLATILE_STATUS,
         .power = 0,
         .type = TYPE_GRASS,
         .accuracy = 75,
@@ -21291,6 +21291,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_STATUS,
         .zMove = { .effect = Z_EFFECT_SPDEF_UP_1 },
+        .argument = { .nonVolatileStatus = MOVE_EFFECT_BURN },
         .magicCoatAffected = TRUE,
         .powderMove = TRUE,
         .argument = 0,
@@ -21316,7 +21317,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .additionalEffects = ADDITIONAL_EFFECTS({
-            .moveEffect = MOVE_EFFECT_SAND,
+            .moveEffect = MOVE_EFFECT_SANDSTORM,
             .chance = 100
         }),
         .mirrorMoveBanned = TRUE,
@@ -22116,9 +22117,62 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         }),
     },
 
-    //Dirge spot here
 
-    //Wind fury spot here
+    [MOVE_DARK_DIRGE] =
+    {
+        .name = COMPOUND_STRING("Dark Dirge"),
+        .description = COMPOUND_STRING(
+            "A eerie song that uses\n"
+            "sound waves to injure."),
+        .effect = EFFECT_HIT,
+        .power = 60,
+        .type = TYPE_DARK,
+        .accuracy = 100,
+        .pp = 10,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .soundMove = TRUE,
+        .ignoresSubstitute = B_UPDATED_MOVE_FLAGS >= GEN_6,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_YAWN_FOE,
+            .self = TRUE,
+            .chance = 50,
+        }),
+        .contestEffect = CONTEST_EFFECT_BADLY_STARTLE_PREV_MONS,
+        .contestCategory = CONTEST_CATEGORY_COOL,
+        .contestComboStarterId = 0,
+        .contestComboMoves = {0},
+        .battleAnimScript = gBattleAnimMove_HyperVoice,
+        .validApprenticeMove = TRUE,
+    },
+
+    [MOVE_WIND_FURY] =
+    {
+        .name = COMPOUND_STRING("Wind Fury"),
+        .description = COMPOUND_STRING(
+            "Expells powerful winds outward.\n"
+            "May clear the field."),
+        .effect = EFFECT_HIT,
+        .power = 75,
+        .type = TYPE_FLYING,
+        .accuracy = 90,
+        .pp = 10,
+        .target = MOVE_TARGET_BOTH,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .windMove = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_DEFOG,
+            .chance = 20,
+        }),
+        .contestEffect = CONTEST_EFFECT_HIGHLY_APPEALING,
+        .contestCategory = CONTEST_CATEGORY_BEAUTY,
+        .contestComboStarterId = 0,
+        .contestComboMoves = {COMBO_STARTER_SUNNY_DAY},
+        .battleAnimScript = gBattleAnimMove_HeatWave,
+        .validApprenticeMove = TRUE,
+    },
 
     [MOVE_BATTLE_CRY] =
     {
@@ -22159,8 +22213,8 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
-        .kickmove = TRUE,
-        .spinmove = TRUE,
+        //.kickmove = TRUE,
+        //.spinmove = TRUE,
         .skyBattleBanned = TRUE,
         .contestEffect = CONTEST_EFFECT_AFFECTED_BY_PREV_APPEAL,
         .contestCategory = CONTEST_CATEGORY_BEAUTY,
@@ -22234,7 +22288,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .category = DAMAGE_CATEGORY_SPECIAL,
         .makesContact = TRUE,
         .additionalEffects = ADDITIONAL_EFFECTS({
-            .moveEffect = MOVE_EFFECT_SNOW,
+            .moveEffect = MOVE_EFFECT_HAIL,
             .chance = 100,
         }),
         .mirrorMoveBanned = TRUE,
@@ -22406,7 +22460,29 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     },
     
        
-    //Sweet Finale
+    [MOVE_SWEET_FINALE] =
+    {
+        .name = COMPOUND_STRING("Sweet Finale"),
+        .description = COMPOUND_STRING(
+            "Attacks in a cloak of\n"
+            "intense light. Heals allies."),
+        .effect = EFFECT_HIT,
+        .power = 60,
+        .type = TYPE_FAIRY,
+        .accuracy = 100,
+        .pp = 20,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .makesContact = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_HEAL_TEAM,
+        }),
+        .contestEffect = CONTEST_EFFECT_IMPROVE_CONDITION_PREVENT_NERVOUSNESS,
+        .contestCategory = CONTEST_CATEGORY_BEAUTY,
+        .contestComboStarterId = 0,
+        .contestComboMoves = {0}
+    },
 
     [MOVE_FIRESTORM] =
     {
@@ -22545,7 +22621,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .sleepTalkBanned = TRUE,
         .instructBanned = TRUE,
         .assistBanned = TRUE,
-        .argument = TWO_TURN_ARG(STRINGID_PKMNFLEWHIGH, COMPRESS_BITS(STATUS3_ON_AIR)),
+        .argument.twoTurnAttack = { .stringId =  STRINGID_PKMNSPRANGUP, .status = COMPRESS_BITS(STATUS3_ON_AIR) },
         .contestEffect = CONTEST_EFFECT_AVOID_STARTLE,
         .contestCategory = CONTEST_CATEGORY_SMART,
         .contestComboStarterId = 0,
@@ -22732,7 +22808,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .description = COMPOUND_STRING(
             "Builds accelerating flames to\n"
             "burn hazards and strike."),
-        .effect = EFFECT_HIT,
+        .effect = EFFECT_RAPID_SPIN,
         .power = B_UPDATED_MOVE_DATA >= GEN_8 ? 50 : 20,
         .type = TYPE_FIRE,
         .accuracy = 100,
@@ -22740,12 +22816,9 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
-        .additionalEffects = ADDITIONAL_EFFECTS({
-            .moveEffect = MOVE_EFFECT_RAPID_SPIN,
-            .self = TRUE,
-        }
+        .additionalEffects = ADDITIONAL_EFFECTS(
         #if B_SPEED_BUFFING_RAPID_SPIN >= GEN_8
-            ,{
+            {
                 .moveEffect = MOVE_EFFECT_SPD_PLUS_1,
                 .self = TRUE,
                 .chance = 100,
@@ -23203,7 +23276,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .description = COMPOUND_STRING(
             "Erases trap moves and Leech\n"
             "Seed. Paralyze adjacent foes."),
-        .effect = EFFECT_HIT,
+        .effect = EFFECT_RAPID_SPIN,
         .power = 30,
         .type = TYPE_ELECTRIC,
         .accuracy = 100,
@@ -23211,11 +23284,8 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .target = MOVE_TARGET_BOTH,
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
-        .spinmove = TRUE,
-        .additionalEffects = ADDITIONAL_EFFECTS({
-            .moveEffect = MOVE_EFFECT_RAPID_SPIN,
-            .self = TRUE,
-        },
+        //.spinmove = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS(
         {
             .moveEffect = MOVE_EFFECT_PARALYSIS,
             .chance = 100,
@@ -23360,7 +23430,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .description = COMPOUND_STRING(
             "Hits with brutally cold storm.\n"
             "May inflict frostbite."),
-        .effect = EFFECT_BLIZZARD,
+        .effect = EFFECT_HIT,
         .power = B_UPDATED_MOVE_DATA >= GEN_9 ? 100 : 95,
         .type = TYPE_ICE,
         .accuracy = 80,
@@ -23369,6 +23439,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
         .windMove = TRUE,
+        .alwaysHitsInHailSnow = B_BLIZZARD_HAIL,
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_FROSTBITE,
             .chance = 20,
@@ -23403,7 +23474,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .description = COMPOUND_STRING(
             "Erases trap moves and Leech\n"
             "Seed. Adjacent foes are frostbitten."),
-        .effect = EFFECT_HIT,
+        .effect = EFFECT_RAPID_SPIN,
         .power = 30,
         .type = TYPE_ICE,
         .accuracy = 100,
@@ -23411,10 +23482,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .target = MOVE_TARGET_BOTH,
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
-        .additionalEffects = ADDITIONAL_EFFECTS({
-            .moveEffect = MOVE_EFFECT_RAPID_SPIN,
-            .self = TRUE,
-        },
+        .additionalEffects = ADDITIONAL_EFFECTS(
         {
             .moveEffect = MOVE_EFFECT_FROSTBITE,
             .chance = 100,
@@ -23884,7 +23952,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     {
         .name = COMPOUND_STRING("Chem-boost"),
         .description = COMPOUND_STRING(
-            "The user uses some of its\n"
+            "Uses some of its\n"
             "HP to raise all its stats."),
         .effect = EFFECT_CLANGOROUS_SOUL,
         .power = 0,
@@ -24060,7 +24128,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .description = COMPOUND_STRING(
             "Hits with brutal, fierce winds.\n"
             "May reset foe's stat changes."),
-        .effect = EFFECT_RAIN_ALWAYS_HIT,
+        .effect = EFFECT_HIT,
         .power = B_UPDATED_MOVE_DATA >= GEN_9 ? 100 : 95,
         .type = TYPE_DRAGON,
         .accuracy = 80,
@@ -24069,11 +24137,12 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
         .windMove = TRUE,
+        .alwaysHitsInRain = TRUE,
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_CLEAR_SMOG,      
             .chance = 20,
         }),
-    },
+    }, 
 
     [MOVE_SPARKLY_SPRITZ] =
     {
@@ -24296,7 +24365,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .name = COMPOUND_STRING("Crimson Storm"),
         .description = COMPOUND_STRING(
             "Hits all with a full-power\n"
-            "attack, sharply lowers Sp. Atk."),
+            "attack, lowers Sp. Atk."),
         .effect = EFFECT_HIT,
         .power = B_UPDATED_MOVE_DATA >= GEN_6 ? 110 : 130,
         .type = TYPE_FIRE,
@@ -24307,7 +24376,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .category = DAMAGE_CATEGORY_SPECIAL,
         .makesContact = B_UPDATED_MOVE_DATA < GEN_4,
         .additionalEffects = ADDITIONAL_EFFECTS({
-            .moveEffect = MOVE_EFFECT_SP_ATK_MINUS_2,
+            .moveEffect = MOVE_EFFECT_SP_ATK_MINUS_1,
             .self = TRUE,
         }),
         .contestEffect = CONTEST_EFFECT_USER_MORE_EASILY_STARTLED,
@@ -24532,7 +24601,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .description = COMPOUND_STRING(
             "Traps the foe in a fierce\n"
             "wind. May cause frostbite."),
-        .effect = EFFECT_BLIZZARD, 
+        .effect = EFFECT_HIT, 
         .power = B_UPDATED_MOVE_DATA >= GEN_6 ? 110 : 120,
         .type = TYPE_FLYING,
         .accuracy = 70,
@@ -24542,6 +24611,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .category = DAMAGE_CATEGORY_SPECIAL,
         .windMove = TRUE,
         .damagesAirborne = TRUE,
+        .alwaysHitsInHailSnow = B_BLIZZARD_HAIL,
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_FROSTBITE,
             .chance = 30,
@@ -24594,7 +24664,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .windMove = TRUE,
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_SPD_MINUS_1,
-            .chance = 30,
+            .chance = 20,
         }),
         .contestEffect = CONTEST_EFFECT_SCRAMBLE_NEXT_TURN_ORDER,
         .contestCategory = CONTEST_CATEGORY_SMART,
@@ -25342,7 +25412,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
-        .argument = TWO_TURN_ARG(STRINGID_ELECTROSHOTCHARGING, B_WEATHER_SNOW),
+        .argument.twoTurnAttack = { .stringId = STRINGID_ELECTROSHOTCHARGING, .status = B_WEATHER_SNOW },
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_SP_ATK_PLUS_1,
             .self = TRUE,
@@ -25366,7 +25436,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
-        .argument = TWO_TURN_ARG(STRINGID_ELECTROSHOTCHARGING, B_WEATHER_SANDSTORM),
+        .argument.twoTurnAttack = { .stringId = STRINGID_ELECTROSHOTCHARGING, .status = B_WEATHER_SANDSTORM },
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_SP_DEF_PLUS_1,
             .self = TRUE,
@@ -25390,7 +25460,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
-        .argument = TWO_TURN_ARG(STRINGID_ELECTROSHOTCHARGING, B_WEATHER_SANDSTORM),
+        .argument.twoTurnAttack = { .stringId = STRINGID_ELECTROSHOTCHARGING, .status = B_WEATHER_SANDSTORM },
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_ATK_PLUS_1,
             .self = TRUE,
@@ -25400,9 +25470,60 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_Strength,
     },
 
-    
+    [MOVE_RESONANT_CRY] =
+    {
+        .name = COMPOUND_STRING("Resonant Cry"),
+        .description = COMPOUND_STRING(
+            "A loud attack that uses\n"
+            "sound to create a veil."),
+        .effect = EFFECT_HIT,
+        .power = 70,
+        .type = TYPE_ICE,
+        .accuracy = 90,
+        .pp = 10,
+        .target = MOVE_TARGET_BOTH,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .soundMove = TRUE,
+        .ignoresSubstitute = B_UPDATED_MOVE_FLAGS >= GEN_6,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_AURORA_VEIL,
+            .sheerForceBoost = SHEER_FORCE_BOOST,
+        }),
+        .contestEffect = CONTEST_EFFECT_BADLY_STARTLE_PREV_MONS,
+        .contestCategory = CONTEST_CATEGORY_COOL,
+        .contestComboStarterId = 0,
+        .contestComboMoves = {0},
+        .battleAnimScript = gBattleAnimMove_HyperVoice,
+        .validApprenticeMove = TRUE,
+    },
 
-
+    [MOVE_CHI_STRIKE] =
+    {
+        .name = COMPOUND_STRING("Chi Strike"),
+        .description = COMPOUND_STRING(
+            "A hard punch that focuses\n"
+            "the team."),
+        .effect = EFFECT_HIT,
+        .power = 60,
+        .type = TYPE_FIGHTING,
+        .accuracy = 100,
+        .pp = 20,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .punchingMove = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_CRIT_PLUS_SIDE,
+            .chance = 100,
+        }),
+        .contestEffect = CONTEST_EFFECT_BETTER_IF_SAME_TYPE,
+        .contestCategory = CONTEST_CATEGORY_TOUGH,
+        .contestComboStarterId = 0,
+        .contestComboMoves = {0},
+        .battleAnimScript = gBattleAnimMove_PowerUpPunch,
+    },
 
     //bulag
 

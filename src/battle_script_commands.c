@@ -3899,23 +3899,23 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                     gBattlescriptCurrInstr = BattleScript_StealthRockActivates;
                 }
                 break;
-            case MOVE_EFFECT_STEELSURGE:
-                if (!(gSideStatuses[GetBattlerSide(gEffectBattler)] & SIDE_STATUS_STEELSURGE))
-                {
-                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SHARPSTEELFLOATS;
-                    BattleScriptPush(gBattlescriptCurrInstr + 1);
-                    gBattlescriptCurrInstr = BattleScript_EffectSteelsurge;
-                }
-                break;
-            case MOVE_EFFECT_GRAVITY:
-                if (!(gFieldStatuses & STATUS_FIELD_GRAVITY)) 
-                {
-                    gFieldStatuses |= STATUS_FIELD_GRAVITY;
-                    gFieldTimers.gravityTimer = 5;
-                    BattleScriptPush(gBattlescriptCurrInstr + 1);
-                    gBattlescriptCurrInstr = BattleScript_EffectGravitySuccess;
-                }
-                break; 
+            // case MOVE_EFFECT_STEELSURGE:
+            //     if (!(gSideStatuses[GetBattlerSide(gEffectBattler)] & SIDE_STATUS_STEELSURGE))
+            //     {
+            //         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SHARPSTEELFLOATS;
+            //         BattleScriptPush(gBattlescriptCurrInstr + 1);
+            //         gBattlescriptCurrInstr = BattleScript_EffectSteelsurge;
+            //     }
+            //     break;
+            // case MOVE_EFFECT_GRAVITY:
+            //     if (!(gFieldStatuses & STATUS_FIELD_GRAVITY)) 
+            //     {
+            //         gFieldStatuses |= STATUS_FIELD_GRAVITY;
+            //         gFieldTimers.gravityTimer = 5;
+            //         BattleScriptPush(gBattlescriptCurrInstr + 1);
+            //         gBattlescriptCurrInstr = BattleScript_EffectGravitySuccess;
+            //     }
+            //     break; 
             case MOVE_EFFECT_MUD_SPORT:
                 if (!(gFieldStatuses & STATUS_FIELD_MUDSPORT)) 
                 {
@@ -3926,124 +3926,124 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                 }
                 break; 
 
-            case MOVE_EFFECT_DEFOG:
-                if (gSideStatuses[GetBattlerSide(gBattlerTarget)] & SIDE_STATUS_SCREEN_ANY
-                || gSideStatuses[GetBattlerSide(gBattlerTarget)] & SIDE_STATUS_HAZARDS_ANY
-                || gSideStatuses[GetBattlerSide(gBattlerAttacker)] & SIDE_STATUS_HAZARDS_ANY
-                || gFieldStatuses & STATUS_FIELD_TERRAIN_ANY)
-            {
-                BattleScriptPush(gBattlescriptCurrInstr + 1);
-                gBattlescriptCurrInstr = BattleScript_DefogTryHazards;
-            }
-                break; 
+        //     case MOVE_EFFECT_DEFOG:
+        //         if (gSideStatuses[GetBattlerSide(gBattlerTarget)] & SIDE_STATUS_SCREEN_ANY
+        //         || gSideStatuses[GetBattlerSide(gBattlerTarget)] & SIDE_STATUS_HAZARDS_ANY
+        //         || gSideStatuses[GetBattlerSide(gBattlerAttacker)] & SIDE_STATUS_HAZARDS_ANY
+        //         || gFieldStatuses & STATUS_FIELD_TERRAIN_ANY)
+        //     {
+        //         BattleScriptPush(gBattlescriptCurrInstr + 1);
+        //         gBattlescriptCurrInstr = BattleScript_DefogTryHazards;
+        //     }
+        //         break; 
 
-        case MOVE_EFFECT_TYPE_DOT:
-        {
-            u8 side = GetBattlerSide(gBattlerTarget);
-            if (!(gSideStatuses[side] & SIDE_STATUS_DAMAGE_NON_TYPES))
-            {
-                gSideStatuses[side] |= SIDE_STATUS_DAMAGE_NON_TYPES;
-                gSideTimers[side].damageNonTypesTimer = 5; // damage is dealt for 4 turns, ends on 5th
-                gSideTimers[side].damageNonTypesType = gMovesInfo[gCurrentMove].type;
-                BattleScriptPush(gBattlescriptCurrInstr + 1);
-                ChooseDamageNonTypesString(gMovesInfo[gCurrentMove].type);
-                gBattlescriptCurrInstr = BattleScript_DamageNonTypesStarts;
-            }
-            break;
-        }
+        // // case MOVE_EFFECT_TYPE_DOT:
+        // {
+        //     u8 side = GetBattlerSide(gBattlerTarget);
+        //     if (!(gSideStatuses[side] & SIDE_STATUS_DAMAGE_NON_TYPES))
+        //     {
+        //         gSideStatuses[side] |= SIDE_STATUS_DAMAGE_NON_TYPES;
+        //         gSideTimers[side].damageNonTypesTimer = 5; // damage is dealt for 4 turns, ends on 5th
+        //         gSideTimers[side].damageNonTypesType = gMovesInfo[gCurrentMove].type;
+        //         BattleScriptPush(gBattlescriptCurrInstr + 1);
+        //         ChooseDamageNonTypesString(gMovesInfo[gCurrentMove].type);
+        //         gBattlescriptCurrInstr = BattleScript_DamageNonTypesStarts;
+        //     }
+        //     break;
+        // }
            
-       case MOVE_EFFECT_GRASSY_TERRAIN:
-                if (!(gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN)) 
-                {
-                    u16 atkHoldEffect = GetBattlerHoldEffect(gBattlerAttacker, TRUE);
+    //    case MOVE_EFFECT_GRASSY_TERRAIN:
+    //             if (!(gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN)) 
+    //             {
+    //                 u16 atkHoldEffect = GetBattlerHoldEffect(gBattlerAttacker, TRUE);
 
-                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAIN_SET_GRASSY;
-                    gFieldStatuses &= ~STATUS_FIELD_TERRAIN_ANY;
-                    gFieldStatuses |= STATUS_FIELD_GRASSY_TERRAIN;
-                    gFieldTimers.terrainTimer = (atkHoldEffect == HOLD_EFFECT_TERRAIN_EXTENDER) ? 8 : 5; 
-                    BattleScriptPush(gBattlescriptCurrInstr + 1);
-                    gBattlescriptCurrInstr = BattleScript_EffectSetTerrain;
-                }
-                break; 
-            case MOVE_EFFECT_MISTY_TERRAIN:
-                if (!(gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN)) 
-                {
-                    u16 atkHoldEffect = GetBattlerHoldEffect(gBattlerAttacker, TRUE);
+    //                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAIN_SET_GRASSY;
+    //                 gFieldStatuses &= ~STATUS_FIELD_TERRAIN_ANY;
+    //                 gFieldStatuses |= STATUS_FIELD_GRASSY_TERRAIN;
+    //                 gFieldTimers.terrainTimer = (atkHoldEffect == HOLD_EFFECT_TERRAIN_EXTENDER) ? 8 : 5; 
+    //                 BattleScriptPush(gBattlescriptCurrInstr + 1);
+    //                 gBattlescriptCurrInstr = BattleScript_EffectSetTerrain;
+    //             }
+    //             break; 
+    //         case MOVE_EFFECT_MISTY_TERRAIN:
+    //             if (!(gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN)) 
+    //             {
+    //                 u16 atkHoldEffect = GetBattlerHoldEffect(gBattlerAttacker, TRUE);
 
-                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAIN_SET_GRASSY;
-                    gFieldStatuses &= ~STATUS_FIELD_TERRAIN_ANY;
-                    gFieldStatuses |= STATUS_FIELD_MISTY_TERRAIN;
-                    gFieldTimers.terrainTimer = (atkHoldEffect == HOLD_EFFECT_TERRAIN_EXTENDER) ? 8 : 5; 
-                    BattleScriptPush(gBattlescriptCurrInstr + 1);
-                    gBattlescriptCurrInstr = BattleScript_EffectSetTerrain;
-                }
-                break;
-            case MOVE_EFFECT_ELECTRIC_TERRAIN:
-                if (!(gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN)) 
-                {
-                    u16 atkHoldEffect = GetBattlerHoldEffect(gBattlerAttacker, TRUE);
+    //                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAIN_SET_GRASSY;
+    //                 gFieldStatuses &= ~STATUS_FIELD_TERRAIN_ANY;
+    //                 gFieldStatuses |= STATUS_FIELD_MISTY_TERRAIN;
+    //                 gFieldTimers.terrainTimer = (atkHoldEffect == HOLD_EFFECT_TERRAIN_EXTENDER) ? 8 : 5; 
+    //                 BattleScriptPush(gBattlescriptCurrInstr + 1);
+    //                 gBattlescriptCurrInstr = BattleScript_EffectSetTerrain;
+    //             }
+    //             break;
+    //         case MOVE_EFFECT_ELECTRIC_TERRAIN:
+    //             if (!(gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN)) 
+    //             {
+    //                 u16 atkHoldEffect = GetBattlerHoldEffect(gBattlerAttacker, TRUE);
 
-                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAIN_SET_GRASSY;
-                    gFieldStatuses &= ~STATUS_FIELD_TERRAIN_ANY;
-                    gFieldStatuses |= STATUS_FIELD_ELECTRIC_TERRAIN;
-                    gFieldTimers.terrainTimer = (atkHoldEffect == HOLD_EFFECT_TERRAIN_EXTENDER) ? 8 : 5; 
-                    BattleScriptPush(gBattlescriptCurrInstr + 1);
-                    gBattlescriptCurrInstr = BattleScript_EffectSetTerrain;
-                }
-                break;
-            case MOVE_EFFECT_PSYCHIC_TERRAIN:
-                if (!(gFieldStatuses & STATUS_FIELD_PSYCHIC_TERRAIN)) 
-                {
-                    u16 atkHoldEffect = GetBattlerHoldEffect(gBattlerAttacker, TRUE);
+    //                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAIN_SET_GRASSY;
+    //                 gFieldStatuses &= ~STATUS_FIELD_TERRAIN_ANY;
+    //                 gFieldStatuses |= STATUS_FIELD_ELECTRIC_TERRAIN;
+    //                 gFieldTimers.terrainTimer = (atkHoldEffect == HOLD_EFFECT_TERRAIN_EXTENDER) ? 8 : 5; 
+    //                 BattleScriptPush(gBattlescriptCurrInstr + 1);
+    //                 gBattlescriptCurrInstr = BattleScript_EffectSetTerrain;
+    //             }
+    //             break;
+    //         case MOVE_EFFECT_PSYCHIC_TERRAIN:
+    //             if (!(gFieldStatuses & STATUS_FIELD_PSYCHIC_TERRAIN)) 
+    //             {
+    //                 u16 atkHoldEffect = GetBattlerHoldEffect(gBattlerAttacker, TRUE);
 
-                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAIN_SET_GRASSY;
-                    gFieldStatuses &= ~STATUS_FIELD_TERRAIN_ANY;
-                    gFieldStatuses |= STATUS_FIELD_PSYCHIC_TERRAIN;
-                    gFieldTimers.terrainTimer = (atkHoldEffect == HOLD_EFFECT_TERRAIN_EXTENDER) ? 8 : 5; 
-                    BattleScriptPush(gBattlescriptCurrInstr + 1);
-                    gBattlescriptCurrInstr = BattleScript_EffectSetTerrain;
-                }
-                break;   
+    //                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAIN_SET_GRASSY;
+    //                 gFieldStatuses &= ~STATUS_FIELD_TERRAIN_ANY;
+    //                 gFieldStatuses |= STATUS_FIELD_PSYCHIC_TERRAIN;
+    //                 gFieldTimers.terrainTimer = (atkHoldEffect == HOLD_EFFECT_TERRAIN_EXTENDER) ? 8 : 5; 
+    //                 BattleScriptPush(gBattlescriptCurrInstr + 1);
+    //                 gBattlescriptCurrInstr = BattleScript_EffectSetTerrain;
+    //             }
+    //             break;   
             
-            case MOVE_EFFECT_SAND:
+    //         case MOVE_EFFECT_SAND:
                 
-                if (TryChangeBattleWeather(gBattlerAttacker, ENUM_WEATHER_SANDSTORM, FALSE))
-                {
-                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_SANDSTORM;
-                    BattleScriptPush(gBattlescriptCurrInstr + 1);
-                    gBattlescriptCurrInstr = BattleScript_EffectSetWeather;
-                }
-                break;
+    //             if (TryChangeBattleWeather(gBattlerAttacker, ENUM_WEATHER_SANDSTORM, FALSE))
+    //             {
+    //                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_SANDSTORM;
+    //                 BattleScriptPush(gBattlescriptCurrInstr + 1);
+    //                 gBattlescriptCurrInstr = BattleScript_EffectSetWeather;
+    //             }
+    //             break;
 
-            case MOVE_EFFECT_SNOW:
+    //         case MOVE_EFFECT_SNOW:
                 
-                if (TryChangeBattleWeather(gBattlerAttacker, ENUM_WEATHER_SNOW, FALSE))
-                {
-                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_SNOW;
-                    BattleScriptPush(gBattlescriptCurrInstr + 1);
-                    gBattlescriptCurrInstr = BattleScript_EffectSetWeather;
-                }
-                break;
+    //             if (TryChangeBattleWeather(gBattlerAttacker, ENUM_WEATHER_SNOW, FALSE))
+    //             {
+    //                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_SNOW;
+    //                 BattleScriptPush(gBattlescriptCurrInstr + 1);
+    //                 gBattlescriptCurrInstr = BattleScript_EffectSetWeather;
+    //             }
+    //             break;
 
-            case MOVE_EFFECT_RAIN:
+    //         case MOVE_EFFECT_RAIN:
                 
-                if (TryChangeBattleWeather(gBattlerAttacker, ENUM_WEATHER_RAIN, FALSE))
-                {
-                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_RAIN;
-                    BattleScriptPush(gBattlescriptCurrInstr + 1);
-                    gBattlescriptCurrInstr = BattleScript_EffectSetWeather;
-                }
-                break;
+    //             if (TryChangeBattleWeather(gBattlerAttacker, ENUM_WEATHER_RAIN, FALSE))
+    //             {
+    //                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_RAIN;
+    //                 BattleScriptPush(gBattlescriptCurrInstr + 1);
+    //                 gBattlescriptCurrInstr = BattleScript_EffectSetWeather;
+    //             }
+    //             break;
 
-            case MOVE_EFFECT_SUN:
+    //         case MOVE_EFFECT_SUN:
                 
-                if (TryChangeBattleWeather(gBattlerAttacker, ENUM_WEATHER_SUN, FALSE))
-                {
-                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_SUNLIGHT;
-                    BattleScriptPush(gBattlescriptCurrInstr + 1);
-                    gBattlescriptCurrInstr = BattleScript_EffectSetWeather;
-                }
-                break;
+    //             if (TryChangeBattleWeather(gBattlerAttacker, ENUM_WEATHER_SUN, FALSE))
+    //             {
+    //                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_SUNLIGHT;
+    //                 BattleScriptPush(gBattlescriptCurrInstr + 1);
+    //                 gBattlescriptCurrInstr = BattleScript_EffectSetWeather;
+    //             }
+    //             break;
 
 
             case MOVE_EFFECT_SPIKES:
@@ -7094,7 +7094,7 @@ static void Cmd_moveend(void)
                     BattleScriptPushCursor();
                     if (GetMoveEffectArg_MoveProperty(gCurrentMove) == MOVE_EFFECT_SCALE_SHOT && !NoAliveMonsForEitherParty())
                         gBattlescriptCurrInstr = BattleScript_ScaleShot;
-                    else if (gMovesInfo[gCurrentMove].argument == MOVE_EFFECT_STEEL_SHOT && !NoAliveMonsForEitherParty())
+                    else if (GetMoveEffectArg_MoveProperty(gCurrentMove) == MOVE_EFFECT_STEEL_SHOT && !NoAliveMonsForEitherParty())
                         gBattlescriptCurrInstr = BattleScript_SteelShot;
 
                     else

@@ -446,7 +446,7 @@ static bool32 HandleEndTurnFirstEventBlock(u32 battler)
              && !IsBattlerProtectedByMagicGuard(battler, GetBattlerAbility(battler)))
             {
                 gBattlerAttacker = battler;
-                gBattleStruct->moveDamage[battler] = GetNonDynamaxMaxHP(battler) / 6;
+                gBattleStruct->moveDamage[battler] = GetNonDynamaxMaxHP(battler) / 16;
                 ChooseDamageNonTypesString(gSideTimers[side].damageNonTypesType);
                 BattleScriptExecute(BattleScript_DamageNonTypesContinues);
                 effect = TRUE;
