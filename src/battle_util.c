@@ -5161,11 +5161,11 @@ gBattleScripting.savedBattler = gBattlerAttacker;
             break;
         
         case ABILITY_SPIKY_ARMOR:
-            if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+            if (!(gBattleStruct->moveResultFlags[gBattlerTarget] & MOVE_RESULT_NO_EFFECT)
              && (!gBattleStruct->isSkyBattle)
              && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
-             && IS_MOVE_PHYSICAL(gCurrentMove)
-             && TARGET_TURN_DAMAGED
+             && IsBattleMovePhysical(gCurrentMove)
+             && IsBattlerTurnDamaged(gBattlerTarget)
              && (gSideTimers[GetBattlerSide(gBattlerAttacker)].spikesAmount != 3))
             {
                 SWAP(gBattlerAttacker, gBattlerTarget, i);
@@ -8859,7 +8859,7 @@ static inline u32 CalcMoveBasePowerAfterModifiers(struct DamageCalculationData *
         break;
 
     case ABILITY_KICKBOXER:
-        if (gMovesInfo[move].kickmove)
+        if (gMovesInfo[move].kickMove)
            modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
         break;
     

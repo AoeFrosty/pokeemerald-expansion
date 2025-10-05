@@ -101,6 +101,8 @@ struct MoveInfo
     bool32 windMove:1;
     bool32 slicingMove:1;
     bool32 healingMove:1;
+    bool32 kickMove: 1;
+    bool32 spinMove: 1;
     bool32 minimizeDoubleDamage:1;
     bool32 ignoresTargetAbility:1;
     bool32 ignoresTargetDefenseEvasionStages:1;
@@ -331,6 +333,16 @@ static inline bool32 IsSlicingMove(u32 moveId)
 static inline bool32 IsHealingMove(u32 moveId)
 {
     return gMovesInfo[SanitizeMoveId(moveId)].healingMove;
+}
+
+static inline bool32 IsKickingMove(u32 moveId)
+{
+    return gMovesInfo[SanitizeMoveId(moveId)].kickMove;
+}
+
+static inline bool32 IsSpinningMove(u32 moveId)
+{
+    return gMovesInfo[SanitizeMoveId(moveId)].spinMove;
 }
 
 static inline bool32 MoveIncreasesPowerToMinimizedTargets(u32 moveId)

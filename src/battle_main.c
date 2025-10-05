@@ -4846,7 +4846,7 @@ s32 GetBattleMovePriority(u32 battler, u32 ability, u32 move)
     else if (ability == ABILITY_TRIAGE && IsHealingMove(move))
         priority += 3;
 
-    else if (ability == ABILITY_SPINNER && gMovesInfo[move].spinmove)
+    else if (ability == ABILITY_SPINNER && gMovesInfo[move].spinMove)
         priority += 3;
 
     if (gProtectStructs[battler].quash)
