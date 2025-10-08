@@ -8672,11 +8672,11 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
 #if P_FAMILY_REGIELEKI
     [SPECIES_REGIELEKI] =
     {
-        .baseHP        = 80,
-        .baseAttack    = 100,
+        .baseHP        = 100,       //+20
+        .baseAttack    = 80,        //-20
         .baseDefense   = 50,
         .baseSpeed     = 200,
-        .baseSpAttack  = 100,
+        .baseSpAttack  = 120,       //+20
         .baseSpDefense = 50,
         .types = MON_TYPES(TYPE_ELECTRIC),
         .catchRate = 3,
@@ -8740,12 +8740,12 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
 #if P_FAMILY_REGIDRAGO
     [SPECIES_REGIDRAGO] =
     {
-        .baseHP        = 200,
-        .baseAttack    = 100,
-        .baseDefense   = 50,
-        .baseSpeed     = 80,
-        .baseSpAttack  = 100,
-        .baseSpDefense = 50,
+        .baseHP        = 160,       //-40
+        .baseAttack    = 80,        //-20
+        .baseDefense   = 70,        //+20
+        .baseSpeed     = 100,       //+20
+        .baseSpAttack  = 120,       //+20
+        .baseSpDefense = 70,        //+20
         .types = MON_TYPES(TYPE_DRAGON),
         .catchRate = 3,
         .expYield = 290,

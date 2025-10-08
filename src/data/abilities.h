@@ -2586,7 +2586,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_RESOLVE] =
     {
         .name = _("Resolve"),
-        .description = COMPOUND_STRING("Sets Misty on entry."),
+        .description = COMPOUND_STRING("Sets Mist on entry."),
         .aiRating = 5,
     },
     // [ABILITY_THICK_STEAM] =

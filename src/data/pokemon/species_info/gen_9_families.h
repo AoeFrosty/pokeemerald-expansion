@@ -5952,11 +5952,11 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
 #if P_FAMILY_IRON_JUGULIS
     [SPECIES_IRON_JUGULIS] =
     {
-        .baseHP        = 94,
-        .baseAttack    = 80,
+        .baseHP        = 104,   //+10
+        .baseAttack    = 67,    //-13
         .baseDefense   = 86,
         .baseSpeed     = 108,
-        .baseSpAttack  = 122,
+        .baseSpAttack  = 125,   //+3
         .baseSpDefense = 80,
         .types = MON_TYPES(TYPE_DARK, TYPE_FLYING),
         .catchRate = 30,
@@ -7949,11 +7949,11 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
 #if P_FAMILY_IRON_CROWN
     [SPECIES_IRON_CROWN] =
     {
-        .baseHP        = 90,
-        .baseAttack    = 72,
+        .baseHP        = 100,        //+10
+        .baseAttack    = 50,         //-22
         .baseDefense   = 100,
         .baseSpeed     = 98,
-        .baseSpAttack  = 122,
+        .baseSpAttack  = 134,        //+12
         .baseSpDefense = 108,
         .types = MON_TYPES(TYPE_STEEL, TYPE_PSYCHIC),
         .catchRate = 10,

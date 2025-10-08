@@ -448,10 +448,10 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
     [SPECIES_TYPHLOSION_HISUI] =
     {
         .baseHP        = 73,
-        .baseAttack    = 79,    //-5
+        .baseAttack    = 74,     //-10
         .baseDefense   = 78,
         .baseSpeed     = 100,    //+5
-        .baseSpAttack  = 119,
+        .baseSpAttack  = 124,    //+5
         .baseSpDefense = 85,
         .types = MON_TYPES(TYPE_FIRE, TYPE_GHOST),
         .catchRate = 45,

@@ -16061,9 +16061,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
     [SPECIES_MR_RIME] =
     {
         .baseHP        = 100,    //+20
-        .baseAttack    = 65,     //-20
+        .baseAttack    = 60,     //-25
         .baseDefense   = 75,
-        .baseSpeed     = 80,     //+10
+        .baseSpeed     = 90,     //+20
         .baseSpAttack  = 110,
         .baseSpDefense = 100,
         .types = MON_TYPES(TYPE_ICE, TYPE_PSYCHIC),
@@ -16373,8 +16373,8 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .baseHP        = 70,
         .baseAttack    = 135,
         .baseDefense   = 95,
-        .baseSpeed     = 85,
-        .baseSpAttack  = 45,
+        .baseSpeed     = 90,        //+5
+        .baseSpAttack  = 40,        //-5
         .baseSpDefense = 70,
         .types = MON_TYPES(TYPE_BUG, TYPE_ROCK),
         .catchRate = 15,
@@ -18251,11 +18251,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
     [SPECIES_VAPOREON] =
     {
         .baseHP        = 130,
-        .baseAttack    = 65,
-        .baseDefense   = 60,
-        .baseSpeed     = 65,
+        .baseAttack    = 60,    //-5
+        .baseDefense   = 70,    //+10
+        .baseSpeed     = 60,    //-5
         .baseSpAttack  = 110,
-        .baseSpDefense = P_UPDATED_STATS >= GEN_2 ? 95 : 110,
+        .baseSpDefense = P_UPDATED_STATS >= GEN_2 ? 110 : 110, //+15
         .types = MON_TYPES(TYPE_WATER),
         .catchRate = 45,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 184 : 196,
@@ -18316,7 +18316,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 
     [SPECIES_JOLTEON] =
     {
-        .baseHP        = 65,
+        .baseHP        = 75,    //+10
         .baseAttack    = 55,    //-10
         .baseDefense   = 60,
         .baseSpeed     = 130,
@@ -18383,10 +18383,10 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
     [SPECIES_FLAREON] =
     {
         .baseHP        = 75,    //+10
-        .baseAttack    = 130,
-        .baseDefense   = 60,
+        .baseAttack    = 140,   //+10
+        .baseDefense   = 75,    //+15
         .baseSpeed     = 60,    //-5
-        .baseSpAttack  = 90,    //-5
+        .baseSpAttack  = 75,    //-20
         .baseSpDefense = 110,
         .types = MON_TYPES(TYPE_FIRE),
         .catchRate = 45,
@@ -18449,12 +18449,12 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 #if P_GEN_2_CROSS_EVOS
     [SPECIES_ESPEON] =
     {
-        .baseHP        = 65,
-        .baseAttack    = 65,
+        .baseHP        = 70,    //+5
+        .baseAttack    = 60,    //-5
         .baseDefense   = 60,
         .baseSpeed     = 110,
         .baseSpAttack  = 130,
-        .baseSpDefense = 95,
+        .baseSpDefense = 105,    //+10
         .types = MON_TYPES(TYPE_PSYCHIC),
         .catchRate = 45,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 184 : 197,
@@ -18517,10 +18517,10 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
     [SPECIES_UMBREON] =
     {
         .baseHP        = 95,
-        .baseAttack    = 65,
+        .baseAttack    = 75,        //+10
         .baseDefense   = 110,
-        .baseSpeed     = 65,
-        .baseSpAttack  = 60,
+        .baseSpeed     = 55,        //-10
+        .baseSpAttack  = 70,        //+10
         .baseSpDefense = 130,
         .types = MON_TYPES(TYPE_DARK),
         .catchRate = 45,
@@ -18585,11 +18585,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
     [SPECIES_LEAFEON] =
     {
         .baseHP        = 65,
-        .baseAttack    = 110,
+        .baseAttack    = 120,   //+10
         .baseDefense   = 130,
         .baseSpeed     = 95,
-        .baseSpAttack  = 60,
-        .baseSpDefense = 65,
+        .baseSpAttack  = 55,    //-5
+        .baseSpDefense = 70,    //+5
         .types = MON_TYPES(TYPE_GRASS),
         .catchRate = 45,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 184 : 196,
@@ -18651,10 +18651,10 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 
     [SPECIES_GLACEON] =
     {
-        .baseHP        = 65,
-        .baseAttack    = 60,
+        .baseHP        = 70,    //+5
+        .baseAttack    = 55,    //-5
         .baseDefense   = 110,
-        .baseSpeed     = 65,
+        .baseSpeed     = 75,    //+10
         .baseSpAttack  = 130,
         .baseSpDefense = 95,
         .types = MON_TYPES(TYPE_ICE),
@@ -18721,9 +18721,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
     [SPECIES_SYLVEON] =
     {
         .baseHP        = 95,
-        .baseAttack    = 65,
-        .baseDefense   = 65,
-        .baseSpeed     = 60,
+        .baseAttack    = 60,    //-5
+        .baseDefense   = 75,    //+10
+        .baseSpeed     = 65,    //+5
         .baseSpAttack  = 110,
         .baseSpDefense = 130,
         .types = MON_TYPES(TYPE_FAIRY),
