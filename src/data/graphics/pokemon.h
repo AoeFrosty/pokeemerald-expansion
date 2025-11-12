@@ -3555,6 +3555,15 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u16 gShinyOverworldPalette_Dewgong[] = INCBIN_U16("graphics/pokemon/dewgong/overworld_shiny.gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
+
+#if P_MEGA_EVOLUTIONS
+#if FROSTY_MEGAS >= SPECIES_DEWGONG
+    const u32 gMonFrontPic_DewgongMega[] = INCBIN_U32("graphics/pokemon/dewgong/mega/front.4bpp.lz");
+    const u32 gMonPalette_DewgongMega[] = INCBIN_U32("graphics/pokemon/dewgong/mega/normal.gbapal.lz");
+    const u32 gMonBackPic_DewgongMega[] = INCBIN_U32("graphics/pokemon/dewgong/mega/back.4bpp.lz");
+    const u32 gMonShinyPalette_DewgongMega[] = INCBIN_U32("graphics/pokemon/dewgong/mega/shiny.gbapal.lz");
+    const u8 gMonIcon_DewgongMega[] = INCBIN_U8("graphics/pokemon/dewgong/mega/icon.4bpp");
+#endif //FROSTY_MEGAS >= SPECIES_RAICHU
 #endif //P_FAMILY_SEEL
 
 #if P_FAMILY_GRIMER

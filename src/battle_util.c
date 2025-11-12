@@ -9620,7 +9620,7 @@ static inline u32 CalcDefenseStat(struct DamageCalculationData *damageCalcData, 
             modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.3));
         break;
     case ABILITY_FOCUS_FLOOD:
-        if  (IsBattlerWeatherAffected(battlerDef, B_WEATHER_RAIN | B_WEATHER_RAIN_PERMANENT))
+        if  (IsBattlerWeatherAffected(battlerDef, B_WEATHER_RAIN | B_WEATHER_RAIN_NORMAL))
             modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.3));
         break;
     case ABILITY_PURIFYING_SALT:
@@ -10461,7 +10461,7 @@ static inline uq4_12_t CalcTypeEffectivenessMultiplierInternal(u32 move, u32 mov
             RecordAbilityBattle(battlerDef, ABILITY_LEVITATE);
         }
     }
-    else if (moveType == TYPE_WATER && IsBattlerWeatherAffected(battlerDef, B_WEATHER_SUN | B_WEATHER_SUN_PERMANENT))
+    else if (moveType == TYPE_WATER && IsBattlerWeatherAffected(battlerDef, B_WEATHER_SUN | B_WEATHER_SUN_NORMAL))
     {
         modifier = UQ_4_12(0.0);
         if (recordAbilities && defAbility == ABILITY_HEAT_SINK)
