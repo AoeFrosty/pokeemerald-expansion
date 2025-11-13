@@ -12894,7 +12894,7 @@ F_TRAINER_FEMALE |
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5154
             .heldItem = ITEM_LOADED_DICE,
-#line 5158
+#line 5159
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
 #line 5157
             .ability = ABILITY_TECHNICIAN,
@@ -12903,8 +12903,10 @@ F_TRAINER_FEMALE |
 #line 5155
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+#line 5158
+            .teraType = TYPE_GHOST,
             .moves = {
-#line 5159
+#line 5160
                 MOVE_BULLET_SEED,
                 MOVE_TAIL_SLAP,
                 MOVE_TIDY_UP,
@@ -12912,21 +12914,21 @@ F_TRAINER_FEMALE |
             },
             },
             {
-#line 5164
+#line 5165
             .species = SPECIES_PORYGON2,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5164
-            .heldItem = ITEM_EVIOLITE,
-#line 5167
-            .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
-#line 5166
-            .ability = ABILITY_TRACE,
 #line 5165
+            .heldItem = ITEM_EVIOLITE,
+#line 5168
+            .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
+#line 5167
+            .ability = ABILITY_TRACE,
+#line 5166
             .lvl = 35,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5168
+#line 5169
                 MOVE_PSYBEAM,
                 MOVE_ELECTROWEB,
                 MOVE_ICY_WIND,
@@ -12934,20 +12936,18 @@ F_TRAINER_FEMALE |
             },
             },
             {
-#line 5173
+#line 5174
             .species = SPECIES_SLAKING,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5173
+#line 5174
             .heldItem = ITEM_SLAKITE,
 #line 5177
             .iv = TRAINER_PARTY_IVS(30, 30, 30, 30, 30, 30),
-#line 5175
+#line 5176
             .lvl = 37,
-#line 5174
+#line 5175
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-#line 5176
-            .teraType = TYPE_GHOST,
             .moves = {
 #line 5178
                 MOVE_COUNTER,

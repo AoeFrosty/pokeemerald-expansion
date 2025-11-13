@@ -419,11 +419,11 @@
 #define MOVE_EFFECT_SUN                 88
 #define MOVE_EFFECT_STEELSURGE          89
 #define MOVE_EFFECT_MUD_SPORT           90
-#define MOVE_EFFECT_DEFOG               91
+#define MOVE_EFFECT_DEFOG               91 //test
 #define MOVE_EFFECT_TYPE_DOT            92
 #define MOVE_EFFECT_ORDER_UP            93
 #define MOVE_EFFECT_ION_DELUGE          94
-#define MOVE_EFFECT_AROMATHERAPY        95 // No functionality yet
+#define MOVE_EFFECT_AROMATHERAPY        95 //test
 #define MOVE_EFFECT_HAZE                96
 #define MOVE_EFFECT_LEECH_SEED          97
 #define MOVE_EFFECT_REFLECT             98
@@ -446,7 +446,6 @@
 #define MOVE_EFFECT_CANNONADE           115
 #define MOVE_EFFECT_WILDFIRE            116
 #define MOVE_EFFECT_VOLCALITH           117
-#define MOVE_EFFECT_DEFOG               118
 #define MOVE_EFFECT_AURORA_VEIL         119
 #define MOVE_EFFECT_YAWN_FOE            120
 #define MOVE_EFFECT_SPITE               121
@@ -460,7 +459,6 @@
 #define MOVE_EFFECT_PREVENT_ESCAPE_SIDE 129
 #define MOVE_EFFECT_CRIT_PLUS_SIDE      130
 #define MOVE_EFFECT_HEAL_TEAM           131
-#define MOVE_EFFECT_AROMATHERAPY        132
 #define MOVE_EFFECT_RECYCLE_BERRIES     133
 #define MOVE_EFFECT_LOWER_SPEED_SIDE    134
 

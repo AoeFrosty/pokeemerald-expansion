@@ -3276,6 +3276,7 @@ void SetMoveEffect(bool32 primary, bool32 certain)
         }
         return;
     }
+    
     else
     {
         if (gBattleMons[gEffectBattler].status2 & sStatusFlagsForMoveEffects[gBattleScripting.moveEffect])
@@ -4339,50 +4340,50 @@ void SetMoveEffect(bool32 primary, bool32 certain)
         }
         break;
 
-    case MOVE_EFFECT_VINE_LASH:
-    case MOVE_EFFECT_CANNONADE:
-    case MOVE_EFFECT_WILDFIRE:
-    case MOVE_EFFECT_VOLCALITH:
-    {
-        u8 side = GetBattlerSide(gBattlerTarget);
-        if (!(gSideStatuses[side] & SIDE_STATUS_DAMAGE_NON_TYPES))
-        {
-            u32 moveType = GetMoveType(gCurrentMove);
-            gSideStatuses[side] |= SIDE_STATUS_DAMAGE_NON_TYPES;
-            gSideTimers[side].damageNonTypesTimer = gBattleTurnCounter + 5; // damage is dealt for 4 turns, ends on 5th
-            gSideTimers[side].damageNonTypesType = moveType;
-            BattleScriptPush(gBattlescriptCurrInstr + 1);
-            ChooseDamageNonTypesString(moveType);
-            gBattlescriptCurrInstr = BattleScript_DamageNonTypesStarts;
-        }
-        break;
+    // case MOVE_EFFECT_VINE_LASH:
+    // case MOVE_EFFECT_CANNONADE:
+    // case MOVE_EFFECT_WILDFIRE:
+    // case MOVE_EFFECT_VOLCALITH:
+    // {
+    //     u8 side = GetBattlerSide(gBattlerTarget);
+    //     if (!(gSideStatuses[side] & SIDE_STATUS_DAMAGE_NON_TYPES))
+    //     {
+    //         u32 moveType = GetMoveType(gCurrentMove);
+    //         gSideStatuses[side] |= SIDE_STATUS_DAMAGE_NON_TYPES;
+    //         gSideTimers[side].damageNonTypesTimer = gBattleTurnCounter + 5; // damage is dealt for 4 turns, ends on 5th
+    //         gSideTimers[side].damageNonTypesType = moveType;
+    //         BattleScriptPush(gBattlescriptCurrInstr + 1);
+    //         ChooseDamageNonTypesString(moveType);
+    //         gBattlescriptCurrInstr = BattleScript_DamageNonTypesStarts;
+    //     }
+    //     break;
 
-    case MOVE_EFFECT_AURORA_VEIL:
-        if (!(gSideStatuses[GetBattlerSide(gBattlerAttacker)] & SIDE_STATUS_AURORA_VEIL))
-        {
-            gSideStatuses[GetBattlerSide(gBattlerAttacker)] |= SIDE_STATUS_AURORA_VEIL;
-            if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_LIGHT_CLAY)
-                gSideTimers[GetBattlerSide(gBattlerAttacker)].auroraVeilTimer = gBattleTurnCounter + 8;
-            else
-                gSideTimers[GetBattlerSide(gBattlerAttacker)].auroraVeilTimer = gBattleTurnCounter + 5;
-            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SET_SAFEGUARD;
-            BattleScriptPush(gBattlescriptCurrInstr + 1);
-            gBattlescriptCurrInstr = BattleScript_EffectAuroraVeilSuccess;  //bulag
-        }
-        break;
+    // case MOVE_EFFECT_AURORA_VEIL:
+    //     if (!(gSideStatuses[GetBattlerSide(gBattlerAttacker)] & SIDE_STATUS_AURORA_VEIL))
+    //     {
+    //         gSideStatuses[GetBattlerSide(gBattlerAttacker)] |= SIDE_STATUS_AURORA_VEIL;
+    //         if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_LIGHT_CLAY)
+    //             gSideTimers[GetBattlerSide(gBattlerAttacker)].auroraVeilTimer = gBattleTurnCounter + 8;
+    //         else
+    //             gSideTimers[GetBattlerSide(gBattlerAttacker)].auroraVeilTimer = gBattleTurnCounter + 5;
+    //         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SET_SAFEGUARD;
+    //         BattleScriptPush(gBattlescriptCurrInstr + 1);
+    //         gBattlescriptCurrInstr = BattleScript_EffectAuroraVeilSuccess;  //bulag
+    //     }
+    //     break;
 
-        case MOVE_EFFECT_YAWN_FOE:
-    {
-        if (gBattleMons[gBattlerTarget].status2.yawn == 0
-            && CanBeSlept(gBattlerTarget, gBattlerTarget, GetBattlerAbility(gBattlerTarget))
-            && RandomPercentage(RNG_G_MAX_SNOOZE, 50))
-        {
-            gBattleMons[gBattlerTarget].volatiles.yawn = 2;
-            BattleScriptPush(gBattlescriptCurrInstr + 1);
-            gBattlescriptCurrInstr = BattleScript_MoveEffectYawnSide;
-        }
-        break;
-    }
+    //     case MOVE_EFFECT_YAWN_FOE:
+    // {
+    //     if (gBattleMons[gBattlerTarget].status2.yawn == 0
+    //         && CanBeSlept(gBattlerTarget, gBattlerTarget, GetBattlerAbility(gBattlerTarget))
+    //         && RandomPercentage(RNG_G_MAX_SNOOZE, 50))
+    //     {
+    //         gBattleMons[gBattlerTarget].volatiles.yawn = 2;
+    //         BattleScriptPush(gBattlescriptCurrInstr + 1);
+    //         gBattlescriptCurrInstr = BattleScript_MoveEffectYawnSide;
+    //     }
+    //     break;
+    // }
     case MOVE_EFFECT_SPITE:
         if (gLastMoves[gBattlerTarget] != MOVE_NONE
             && gLastMoves[gBattlerTarget] != MOVE_UNAVAILABLE)
@@ -4417,6 +4418,7 @@ void SetMoveEffect(bool32 primary, bool32 certain)
             gBattleCommunication[CURSOR_POSITION] = 1; // add "Coins scattered." message
         }
         // fall through
+        break;
     case MOVE_EFFECT_CONFUSE_SIDE:
         BattleScriptPush(gBattlescriptCurrInstr + 1);
         gBattlescriptCurrInstr = BattleScript_EffectConfuseSide;
@@ -4470,10 +4472,10 @@ void SetMoveEffect(bool32 primary, bool32 certain)
             case STATUS1_PARALYSIS:
                 gBattlescriptCurrInstr = BattleScript_TargetPRLZHeal;
                 break;
-            case STATUS1_SLEEP:
-                TryDeactivateSleepClause(GetBattlerSide(gEffectBattler), gBattlerPartyIndexes[gBattlerTarget]);
-                gBattlescriptCurrInstr = BattleScript_TargetWokeUp;
-                break;
+            // case STATUS1_SLEEP:
+            //     TryDeactivateSleepClause(GetBattlerSide(gEffectBattler), gBattlerPartyIndexes[gBattlerTarget]);
+            //     gBattlescriptCurrInstr = BattleScript_TargetWokeUp;
+            //     break;
             case STATUS1_BURN:
                 gBattlescriptCurrInstr = BattleScript_TargetBurnHeal;
                 break;
@@ -4493,10 +4495,13 @@ void SetMoveEffect(bool32 primary, bool32 certain)
         break;
         }
         }
+
     
 
     gBattleScripting.moveEffect = 0;
 }
+    }
+} //bulag
 
 static bool32 CanApplyAdditionalEffect(const struct AdditionalEffect *additionalEffect)
 {

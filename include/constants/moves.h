@@ -1096,12 +1096,11 @@
 #define MOVE_TREMOR_BARGE 1030      //sand electro shot physical                            //TM
 
 //Stage 4 NTM
-#define MOVE_SWEET_FINALE 1031      //test
-#define MOVE_DARK_DIRGE 1032        //test
-#define MOVE_WIND_FURY 1033         //test
-#define MOVE_RESONANT_CRY 1034      //test
-#define MOVE_CHI_STRIKE 1035        //test
-#define MOVE_SPECTRAL_HOLD 1036     //test
+#define MOVE_SWEET_FINALE 1031      
+#define MOVE_DARK_DIRGE 1032        
+#define MOVE_WIND_FURY 1033         
+#define MOVE_CHI_STRIKE 1034
+#define MOVE_SPECTRAL_HOLD 1036     
 #define MOVE_SPORE_SHOT 1037
 #define MOVE_PRESSURE_PULSE 1038
 #define MOVE_SUN_BURN 1039
@@ -1111,7 +1110,7 @@
 #define MOVE_DARK_PALM 1043
 #define MOVE_LUNAR_RAIN 1044
 #define MOVE_BOUNDLESS_EYE 1045
-#define MOVE_CHI_STRIKE 1046 //whatever flapple move called
+#define MOVE_PLACEHOLDERB 1046
 #define MOVE_PLACEHOLDERA 1047 //whatever appletun move called
 #define MOVE_SUGAR_RUSH 1048    //slurpuff raise team atk
 #define MOVE_SPIRIT_SONG 1049   //chimecho raise team spa
